@@ -1,0 +1,224 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>index</title>
+    <link rel="stylesheet" href="sign_up.css" />
+    <style>
+        * {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: 'Poppins', sans-serif;
+}
+
+nav {
+  width: 100%;
+  height: 75px;
+  line-height: 75px;
+  padding: 0 50px;
+  position: fixed;
+  background-image: linear-gradient(#71b7e6, #9b59b6);
+  top: 0;
+  left: 0;
+  right: 0;
+  display: flex;
+  justify-content: space-between;
+  z-index: 999;
+}
+
+nav .logo p {
+  font-size: 22px;
+  font-weight: bold;
+  color: white;
+  text-transform: uppercase;
+  letter-spacing: 1.5px;
+  cursor: pointer;
+  position: fixed;
+  margin: 0;
+}
+
+nav ul {
+  margin: 0;
+  padding: 0;
+  display: flex;
+}
+
+nav li {
+  display: inline-block;
+  list-style: none;
+  margin-right: 20px;
+}
+
+nav li:last-child {
+  margin-right: 0;
+}
+
+nav li a {
+  font-size: 18px;
+  text-transform: uppercase;
+  padding: 0px 10px;
+  color: white;
+  text-decoration: none;
+}
+
+nav li a:hover {
+  color: #ff8c69;
+  transition: all 0.4s ease 0s;
+}
+
+body {
+    display: flex;
+    flex-direction: column;
+    margin-top: 15px;
+    justify-content: center;
+    align-items: center;
+    padding: 75px 50px;
+    background: linear-gradient(135deg, #9b59b6, #71b7e6);
+}
+
+.container {
+    max-width: 800px;
+    width: 100%;
+    background: #fff;
+    padding: 25px 30px;
+    border-radius: 5px;
+    background: linear-gradient(135deg, #aacce3, #e577cf);
+    justify-content: space-between;
+    margin: 20px 0 12px 0;
+}
+
+.container .title {
+    font-size: 30px;
+    font-weight: 500;
+    position: relative;
+    font-weight: bold;
+    text-align: left;
+    color: rgb(66, 63, 63);
+}
+
+.container .title::before {
+    content: '';
+    position: absolute;
+    left: 0;
+    bottom: 0;
+    height: 3px;
+    width: 30px;
+}
+
+
+.button {
+    margin: 45px 0;
+}
+
+.button a {
+    text-decoration: none; 
+    margin-bottom: 15px;
+}
+.button div:not(:first-child) {
+    margin-top: 10px; 
+}
+.button input {
+    height: 45px;
+    width: 100%; /* Set the width to 100% to make buttons expand horizontally */
+    outline: none;
+    color: #fff;
+    border: none;
+    font-size: 20px;
+    font-weight: 500;
+    border-radius: 5px;
+    letter-spacing: 1px;
+    background: linear-gradient(135deg, #9b59b6, #71b7e6);
+    cursor: pointer;
+    margin-top: 10px; /* You can adjust the top margin to control the vertical spacing between buttons */
+    margin-top: 0; /* This line is not needed and can be removed */
+    padding: 10px 200px; /* Add padding to increase the width of the buttons horizontally */
+}
+
+.button input:hover {
+    background: linear-gradient(-135deg, #9b59b6, #71b7e6);
+}
+
+@media (max-width: 584px) {
+  .container {
+    max-width: 100%;
+  }
+  form .user-details .input-box {
+    margin-bottom: 15px;
+    width: 100%;
+  }
+  .container form .user-details {
+    max-height: 300px;
+    overflow-y: scroll;
+  }
+  .user-details::-webkit-scrollbar {
+    width: 0;
+  }
+}
+
+@media (max-width: 768px) {
+  nav {
+    padding: 0px 10px;
+  }
+  nav ul {
+    float: none;
+    text-align: center;
+    margin-top: 10px;
+  }
+  nav li {
+    display: block;
+    margin-bottom: 10px;
+  }
+  form {
+    margin-top: 75px;
+  }
+}
+
+    </style>
+</head>
+<body>
+    <nav>
+        <div class="logo">
+            <p>enterprise resource planning</p>
+        </div>
+        <ul>
+            <!-- <li><a href="/home/">Home</a></li> -->
+            <li><a href="/edit_profile/">Edit Profile</a></li>
+            <li><a href="{% url 'logout' %}">Logout</a></li>
+        </ul>
+    </nav>
+    <!-- <h1>Welcome to home page</h1> -->
+
+    <div class="button">
+
+      <div class="container">
+          <div>
+              <a href="{% url 'Order_Received_Create' %}"><input type="submit" value="Order Recieved" /></a>
+          </div><br>
+
+          <div>
+              <a href="{% url 'Order_Dispatched_Create' %}"><input type="submit" value="Order Dispatched" /></a>
+          </div><br>
+
+          <div>
+              <a href="{% url 'Order_Transit_Create' %}"><input type="submit" value="Order Transit" /></a>
+          </div><br>
+
+          <div>
+              <a href="{% url 'Supplier_Detail_Create' %}"><input type="submit" value="Supplier Detail" /></a>
+          </div><br>
+
+          <div>
+              <a href="{% url 'Product_Create' %}"><input type="submit" value="Create Product" /></a>
+          </div><br>
+
+          <div>
+              <a href="{% url 'Cancel_Order_Create' %}"><input type="submit" value="Cancel Order" /></a>
+          </div><br>
+      </div>
+  </div>
+
+    <!-- <a href="/edit_profile/">Edit Profile</a> -->
+</body>
+</html>

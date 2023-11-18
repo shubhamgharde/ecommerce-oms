@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Order Confirmation</title>
+    <link rel="stylesheet" type="text/css" href="styles.css"> <!-- Link to your CSS file -->
+    <style>
+         * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Poppins', sans-serif;
+        }
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f0f0f0;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            min-height: 100vh;
+            margin: 0;
+            padding: 0;
+            margin-top: 75px;
+        }
+                nav {
+            width: 100%;
+            height: 75px;
+            line-height: 75px;
+            padding: 0 50px;
+            position: fixed;
+            background-image: linear-gradient(#71b7e6, #9b59b6);
+            top: 0;
+            left: 0;
+            right: 0;
+            display: flex;
+            justify-content: space-between;
+            z-index: 999;
+            box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.1);
+        }
+
+        nav .logo p {
+            font-size: 24px;
+            font-weight: bold;
+            color: white;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            cursor: pointer;
+            margin: 0;
+        }
+
+        nav ul {
+            margin: 0;
+            padding: 0;
+            list-style: none;
+            display: flex;
+            align-items: center;
+        }
+
+        nav ul li {
+            margin-right: 20px;
+        }
+
+        nav ul li:last-child {
+            margin-right: 0;
+        }
+
+        nav ul li a {
+            font-size: 16px;
+            text-transform: uppercase;
+            padding: 15 20px;
+            color: white;
+            text-decoration: none;
+            font-weight: bold;
+        }
+
+        nav ul li a:hover {
+            background: linear-gradient(135deg, #63aee0, #ab5cca);
+            padding: 15px 20px;
+            transition: all 0.4s ease 0s;
+            border-radius: 8px;
+        }
+        
+        .order-list {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 20px;
+}
+
+.order-card {
+    border: 1px solid #ccc;
+    padding: 20px;
+    border-radius: 5px;
+    width: 300px;
+    background-color: #f4f6f7;
+}
+
+.order-details p {
+    margin: 0;
+}
+
+/* You can add more CSS styling as needed to further customize the appearance. */
+
+    </style>
+</head>
+<body>
+
+    <nav>
+        <div class="logo">
+            <p>SHOPPING DEALS</p>
+        </div>
+        <ul>
+            <li><a href="{% url 'home' %}">HOME</a></li>
+            <li><a href="{% url 'placed_order_list' %}">Your Orders</a></li>
+        </ul>
+    </nav>
+    <h1>Order Confirmation</h1><br>
+    <p>Your order has been placed successfully. Here are the order details:</p>
+    
+    <div class="order-list">
+        {% for order in orders %}
+        <div class="order-card">
+            <div class="order-details">
+                <p><strong>Order ID:</strong> {{ order.id }}</p>
+                <p><strong>Order Date:</strong> {{ order.ordered_date }}</p>
+                <p><strong>Shipping Address:</strong> {{ order.customer.name }} - {{ order.customer.shipping_address }}</p>
+                <p><strong>Product Name:</strong> {{ order.product_name }}</p>
+                <p><strong>Quantity:</strong> {{ order.quantity }}</p>
+                <p><strong>Basic Price:</strong> Rs. {{ order.basic_price }}</p>
+                <p><strong>Transportation Charges:</strong> Rs. {{ order.transportation_charges }}</p>
+                <p><strong>Additional Taxes:</strong> Rs. {{ order.additional_taxes }}</p>
+                <p><strong>Total Amount:</strong> Rs. {{ order.total_amount }}</p>
+                <p><strong>Order Status:</strong> {{ order.status }}</p>
+            </div>
+        </div>
+        {% endfor %}
+    </div>
+
+    <p>Thank you for shopping with us!</p>
+</body>
+</html>

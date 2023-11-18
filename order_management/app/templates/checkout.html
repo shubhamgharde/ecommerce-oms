@@ -1,0 +1,237 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Checkout - Shopping Deals</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Poppins', sans-serif;
+        }
+
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f0f0f0;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            min-height: 100vh;
+            margin: 0;
+            padding: 0;
+            margin-top: 75px;
+        }
+
+        nav {
+            width: 100%;
+            height: 75px;
+            line-height: 75px;
+            padding: 0 50px;
+            position: fixed;
+            background-image: linear-gradient(#71b7e6, #9b59b6);
+            top: 0;
+            left: 0;
+            right: 0;
+            display: flex;
+            justify-content: space-between;
+            z-index: 999;
+            box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.1);
+        }
+
+        nav .logo p {
+            font-size: 24px;
+            font-weight: bold;
+            color: white;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            cursor: pointer;
+            margin: 0;
+        }
+
+        nav ul {
+            margin: 0;
+            padding: 0;
+            list-style: none;
+            display: flex;
+            align-items: center;
+        }
+
+        nav ul li {
+            margin-right: 20px;
+        }
+
+        nav ul li:last-child {
+            margin-right: 0;
+        }
+
+        nav ul li a {
+            font-size: 16px;
+            text-transform: uppercase;
+            padding: 15 20px;
+            color: white;
+            text-decoration: none;
+            font-weight: bold;
+        }
+
+        nav ul li a:hover {
+            background: linear-gradient(135deg, #63aee0, #ab5cca);
+            padding: 15px 20px;
+            transition: all 0.4s ease 0s;
+            border-radius: 8px;
+        }
+
+        .container {
+            background-color: #fff;
+            padding: 70px;
+            border-radius: 8px;
+            box-shadow: 0 0 20px rgba(0, 0, 0, 0.2);
+            width: 80%;
+            max-width: 900px;
+            margin: 20px auto;
+            text-align: center;
+        }
+
+        .title {
+            font-size: 36px;
+            font-weight: bold;
+            margin-bottom: 20px;
+            color: #333;
+        }
+
+        h1 {
+            font-size: 42px;
+            margin-bottom: 20px;
+            color: #333;
+        }
+
+        form {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        ul {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+            margin-bottom: 20px;
+        }
+
+        li {
+            margin-bottom: 10px;
+        }
+
+        label {
+            display: flex;
+            align-items: center;
+            font-size: 18px;
+            color: #333;
+        }
+
+        input[type="radio"] {
+            margin-right: 10px;
+        }
+
+        button {
+            background-color: #71b7e6;
+            color: white;
+            font-size: 20px;
+            padding: 15px 30px;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: background 0.3s ease-in-out;
+        }
+
+        button:hover {
+            background: linear-gradient(135deg, #63aee0, #ab5cca);
+        }
+</style>
+<body>
+
+    <nav>
+        <div class="logo">
+            <p>SHOPING DEALS</p>
+        </div>
+        <ul>
+            <li><a href="{% url 'manage_addresses' %}">Add Address</a></li>
+            <li><a href="{% url 'home' %}">HOME</a></li>
+            <li><a href="{% url 'cust_logout' %}">LOGOUT</a></li>
+        </ul>
+    </nav>
+
+    <div class="container">
+    
+
+
+
+    <h1>Checkout Here</h1>
+    
+    <form method="post" action="{% url 'place_order' %}">
+
+        {% csrf_token %}
+        <h2>Choose Address</h2><br>
+        {% if addresses %}
+            <ul>
+                {% for address in addresses %}
+                    <li>
+                        <label>
+                            <input type="radio" name="selected_address" value="{{ address.id }}">
+                            {{ address.name }} - {{ address.billing_address }}
+                        </label>
+                    </li>
+                {% endfor %}
+            </ul>
+        {% else %}
+            <p>No saved addresses found.</p>
+        {% endif %}
+
+        <button type="submit">Place Order</button>
+    </form>
+</body>
+<script>
+    // JavaScript code to remove pending items
+    document.addEventListener('DOMContentLoaded', function () {
+        var pendingCheckoutItem = 123; // Replace with the actual pending item ID
+        if (pendingCheckoutItem > 0) {
+            // Create an XMLHttpRequest (AJAX) object
+            var xhr = new XMLHttpRequest();
+            var url = "/checkout/"; // Replace with the actual URL of your checkout view
+
+            // Set up the request
+            xhr.open("POST", url, true);
+            xhr.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
+            // Get the CSRF token from your Django template or set it manually
+            var csrfToken = "your_csrf_token_here";
+            xhr.setRequestHeader("X-CSRFToken", csrfToken);
+
+            // Create a form data object to send the removal data
+            var formData = new FormData();
+            formData.append('remove_pending_item', pendingCheckoutItem);
+
+            // Define a function to handle the response
+            xhr.onreadystatechange = function () {
+                if (xhr.readyState === 4 && xhr.status === 200) {
+                    // Check if the response indicates success (you can customize this part)
+                    var response = JSON.parse(xhr.responseText);
+                    if (response.success) {
+                        // Refresh the cart or take any other necessary actions
+                        location.reload(); // Reload the page to reflect the updated cart
+                    } else {
+                        // Handle the error condition (e.g., display an error message)
+                        console.error("Error: " + response.error);
+                    }
+                }
+            };
+
+            // Send the request
+            xhr.send(formData);
+        }
+    });
+</script>
+
+
+
+
+</html>

@@ -1,0 +1,372 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Supplier Details List</title>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <style>
+/* Reset default styles */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Poppins', sans-serif;
+}
+
+/* Body styles */
+body {
+    font-family: Arial, sans-serif;
+    background-color: #f0f0f0;
+    margin-top: 75px;
+}
+
+/* Navigation styles */
+nav {
+    width: 100%;
+    height: 75px;
+    line-height: 75px;
+    padding: 0 50px;
+    position: fixed;
+    background-image: linear-gradient(#71b7e6, #9b59b6);
+    top: 0;
+    left: 0;
+    right: 0;
+    display: flex;
+    justify-content: space-between;
+    z-index: 999;
+    box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.1);
+}
+
+nav .logo p {
+    font-size: 24px;
+    font-weight: bold;
+    color: white;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    cursor: pointer;
+    margin: 0;
+}
+
+nav ul {
+    margin: 0;
+    padding: 0;
+    list-style: none;
+}
+
+nav ul li {
+    display: inline-block;
+    margin-right: 20px;
+}
+
+nav ul li:last-child {
+    margin-right: 0;
+}
+
+nav ul li a {
+    font-size: 16px;
+    text-transform: uppercase;
+    padding: 15 20px;
+    color: white;
+    text-decoration: none;
+    font-weight: bold;
+}
+
+nav ul li a:hover {
+    background: linear-gradient(135deg, #63aee0, #ab5cca);
+    padding: 15px 20px;
+    transition: all 0.4s ease 0s;
+    border-radius: 8px;
+}
+.search-box {
+    display: flex;
+    align-items: center;
+    position: relative;
+}
+
+#search-query {
+    width: 100%;
+    padding: 10px;
+    padding-left: 40px; /* Add left padding to accommodate the icon */
+    border: 1px solid #ccc;
+    border-radius: 4px;
+}
+
+#search-query:focus {
+    outline: none;
+    border-color: #71b7e6; /* Highlight when focused */
+}
+
+/* Search icon styles */
+.search-icon {
+    position: absolute;
+    left: 10px; /* Adjust the left position to separate the icon from the input */
+    top: 50%;
+    transform: translateY(-50%);
+    color: #777; /* Adjust the color as needed */
+    cursor: pointer;
+    line-height: 1; /* Center vertically */
+    font-size: 20px; /* Adjust the font size as needed */
+}
+
+/* Container styles */
+.container {
+    max-width: 100%; /* Use maximum width */
+    margin: 95px auto 20px;
+    background-color: #cfdfeb;
+    /* background: linear-gradient(135deg, #71b7e6, #9b59b6); */
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+    overflow-x: auto; /* Enable horizontal scroll if needed */
+}
+
+.container .title {
+    font-size: 28px;
+    font-weight: bold;
+    margin-bottom: 20px;
+}
+
+/* Table styles */
+.staff-table {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+.staff-table, th, td {
+    border: 1px solid #969494;
+}
+
+th, td {
+    padding: 12px;
+    text-align: center;
+}
+
+.staff-table th {
+    /* background-color: #8271e6; */
+    background:#b787c9;
+    color: white;
+}
+
+/* Button styles */
+/* Button styles */
+.button {
+    text-align: center; /* Center-align buttons */
+}
+
+.button a {
+    text-decoration: none;
+    margin-right: 10px; /* Add spacing between buttons */
+}
+
+.button input.big {
+    height: 60px; /* Increase the height for a bigger button */
+    width: 50%; /* Set the width to 50% for centering */
+    max-width: 300px; /* Limit the maximum width */
+    outline: none;
+    color: #fff;
+    font-size: 20px; /* Increase the font size for a bigger button */
+    font-weight: 500;
+    border-radius: 5px;
+    letter-spacing: 1px;
+    background: linear-gradient(135deg, #71b7e6, #9b59b6);
+    cursor: pointer;
+    margin-top: 0;
+    /* margin-right: 10px; Remove spacing between buttons */
+    text-align: center;
+    margin: 0 auto; /* Center horizontally */
+    display: block; /* Ensure it takes the full available width */
+}
+
+.button input.small {
+    height: 45px;
+    width: 100%;
+    outline: none;
+    color: #fff;
+    border: none;
+    font-size: 16px;
+    font-weight: 500;
+    border-radius: 5px;
+    letter-spacing: 1px;
+    background: linear-gradient(135deg, #71b7e6, #9b59b6);
+    cursor: pointer;
+    margin-top: 0;
+    margin-right: 10px; /* Add spacing between buttons */
+    padding: 8px 16px; /* Adjust padding for smaller button */
+}
+
+.button input:hover {
+    
+    background: linear-gradient(-135deg, #71b7e6, #9b59b6);
+}
+/* Style for the supplier name links */
+.supplier-link {
+    color: #007BFF; /* Link color */
+    text-decoration: none; /* Remove the underline */
+    font-weight: bold; /* Make the text bold */
+}
+
+.supplier-link:hover {
+    color: #0056b3; /* Change color on hover */
+    text-decoration: underline; /* Underline on hover */
+}
+
+@media (max-width: 584px) {
+    /* Adjust styles for smaller screens here */
+
+    .container{
+        max-width: 100%;
+    }
+    form .user-details .input-box{
+        margin-bottom: 15px;
+        width: 100%;
+    }
+    .container form .user-details{
+        max-height: 300px;
+        overflow-y: scroll;
+    }
+    .user-details::-webkit-scrollbar{
+        width: 0;
+    }
+    nav ul li {
+        margin-right: 10px;
+    }
+    .search-box {
+        padding-left: 30px;
+    }
+    #search-query {
+        padding: 8px;
+    }
+}
+
+/* Media query for even smaller screens (e.g., mobile phones) */
+@media (max-width: 768px) {
+    /* Further adjustments for mobile screens here */
+    nav {
+        padding: 0px 10px; /* Reduce padding for smaller screens */
+    }
+
+    nav ul {
+        float: none;
+        text-align: center; /* Center the navigation links */
+        margin-top: 10px;
+        /* flex-direction: column; */
+        align-items: flex-end; /* Add some space between the logo and links */
+    }
+
+    nav li {
+        display: block;
+        margin-bottom: 10px; /* Add space between each link */
+    }
+    form {
+        margin-top: 75px; /* Match the height of the navigation bar */
+    }
+    .search-box {
+        padding-left: 20px;
+    }
+    #search-query {
+        padding: 6px;
+    }
+}
+        
+          </style>
+</head>
+
+<body>
+<nav>
+    <div class="logo">
+        <p>Order Management</p>
+    </div>
+    <ul>
+        <li><a href="{% url 'supplier_detail_list' %}">Supplier List</a></li>
+        <li><a href="{% url 'Supplier_Detail_Create' %}">Add Supplier</a></li>
+        <li><a href="{% url 'admin_zone' %}">ADMIN HOME</a></li>
+        <li> 
+            <form method="get" action="" id="search-form">
+                <div class="search-box">
+                    <div class="search-icon" id="search-icon">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24">
+                            <path d="M15.5 14h-.79l-.28-.27a6.5 6.5 0 1 0-1.06 1.06l.27.28v.79l5 4.99L20.49 19l-4.99-5zm-6 0C7.01 14 5 11.99 5 9.5S7.01 5 9.5 5 14 7.01 14 9.5 11.99 14 9.5 14z"/>
+                        </svg>
+                    </div>
+                    <input type="text" name="search_query" id="search-query" placeholder="Search by Supplier Name">
+                </div>
+            </form>
+        </li>
+    </ul>
+</nav>
+    
+
+    <div class="container">
+        <div class="title">Supplier Details List</div>
+        <form method="post">
+            {% csrf_token %}
+            <!-- Display error messages here if any -->
+            <div>
+                {% if search_query %}
+                <p>Search results for: "{{ search_query }}"</p>
+                {% endif %}
+            </div>
+
+        <div class="user-details">
+
+        <div id="search-results">
+            <table class="staff-table">
+                <thead class="heading">
+                    <tr>
+                        <th>Supplier Name</th>
+                        <th>Supplier Contact</th>
+                        <th>Supplier Address</th>
+                        <th>Supplier GST Number</th>
+                        <th>Available Quantity</th>
+                        <th>Status</th>
+                    </tr>
+                </thead>
+                <tbody class="staff-body">
+                    {% for supplier in supplier_details %}
+                    <tr>
+                        <td>
+                            <a class="supplier-link" href="{% url 'product_list_supplier' supplier.id %}">{{ supplier.supplier_name }}</a>
+                        </td>
+                        <td>{{ supplier.supplier_contact }}</td>
+                        <td>{{ supplier.supplier_address }}</td>
+                        <td>{{ supplier.supplier_gst_no }}</td>
+                        <td>{{ supplier.available_quantity }}</td>
+                        <td>{{ supplier.status }}</td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+            </form>
+        </div>
+        </div>
+    </div>
+    <script>
+        function filterResults() {
+            var searchQuery = $('#search-query').val().toLowerCase();
+            $('#search-results tbody tr').each(function () {
+                var supplierName = $(this).find('td:first').text().toLowerCase();
+                if (supplierName.includes(searchQuery)) {
+                    $(this).show();
+                } else {
+                    $(this).hide();
+                }
+            });
+        }
+
+        $('#search-query').on('input', filterResults);
+
+        document.getElementById('search-icon').addEventListener('click', function() {
+            var searchQuery = document.getElementById('search-query').value;
+        });
+        // Trigger the search function when the Enter key is pressed in the search input field
+        $('#search-icon').on('keyup', function (event) {
+            if (event.key === 'Enter') {
+                filterResults();
+            }
+        });
+    </script>
+</body>
+
+</html>

@@ -1,0 +1,169 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Empty Cart</title>
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Poppins:400,700&display=swap">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Poppins', sans-serif;
+            background-color: #f8f9fa;
+            margin-top: 75px;
+        }
+
+        nav {
+            width: 100%;
+            height: 75px;
+            line-height: 75px;
+            padding: 0 20px;
+            position: fixed;
+            background-image: linear-gradient(#71b7e6, #9b59b6);
+            top: 0;
+            left: 0;
+            right: 0;
+            display: flex;
+            justify-content: space-between;
+            z-index: 999;
+            box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.1);
+        }
+
+        nav .logo p {
+            font-size: 24px;
+            font-weight: bold;
+            color: white;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            cursor: pointer;
+            margin: 0;
+        }
+
+        nav ul {
+            margin: 0;
+            padding: 0;
+            list-style: none;
+        }
+
+        nav ul li {
+            display: inline-block;
+            margin-right: 20px;
+        }
+
+        nav ul li:last-child {
+            margin-right: 0;
+        }
+
+        nav ul li a {
+            font-size: 16px;
+            text-transform: uppercase;
+            padding: 15px 20px;
+            color: white;
+            text-decoration: none;
+            font-weight: bold;
+            transition: background 0.3s ease-in-out;
+        }
+
+        nav ul li a:hover {
+            background: linear-gradient(135deg, #63aee0, #ab5cca);
+            padding: 15px 20px;
+            border-radius: 8px;
+        }
+
+        .container {
+            max-width: 800px;
+            margin: 50px auto;
+            text-align: center;
+        }
+
+        .title {
+            font-size: 36px;
+            font-weight: bold;
+            color: #333;
+            margin-bottom: 20px;
+        }
+
+        header {
+            margin-bottom: 20px;
+        }
+
+        h1 {
+            font-size: 28px;
+            color: #555;
+        }
+
+        .empty-cart {
+            padding: 40px;
+            background-color: #fff;
+            box-shadow: 0 0 20px rgba(0, 0, 0, 0.2);
+            border-radius: 12px;
+            text-align: center;
+            transition: transform 0.3s ease-in-out;
+        }
+
+        .empty-cart p {
+            font-size: 18px;
+            color: #888;
+            margin-bottom: 30px;
+        }
+
+        .empty-cart a {
+            display: inline-block;
+            padding: 15px 30px;
+            background-color: #71b7e6;
+            color: white;
+            text-decoration: none;
+            font-weight: bold;
+            border-radius: 8px;
+            transition: background 0.3s ease-in-out;
+        }
+
+        .empty-cart a:hover {
+            background-color: #558ed5;
+        }
+
+        /* Animation */
+        @keyframes scaleIn {
+            0% {
+                transform: scale(0);
+            }
+            100% {
+                transform: scale(1);
+            }
+        }
+
+        .empty-cart {
+            animation: scaleIn 0.5s ease-out;
+        }
+    </style>
+</head>
+<body>
+    <nav>
+        <div class="logo">
+            <p>SHOPPING DEALS</p>
+        </div>
+        <ul>
+            <li><a href="{% url 'home' %}">HOME</a></li>
+            <li><a href="{% url 'cust_logout' %}">LOGOUT</a></li>
+        </ul>
+    </nav>
+
+    <div class="container">
+        <div class="title">MAKE YOUR SHOPPING</div>
+        <header>
+            <h1>Shopping Cart</h1>
+        </header>
+        <main>
+            <div class="empty-cart">
+                <p>Your shopping cart is empty.</p>
+                <a href="{% url 'home' %}">Continue Shopping</a>
+            </div>
+        </main>
+    </div>
+</body>
+</html>

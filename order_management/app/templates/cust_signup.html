@@ -1,0 +1,329 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Signup</title>
+  <link rel="stylesheet" href="sign_up.css" />
+  <style>
+       /* Reset default styles */
+       * {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Poppins', sans-serif;
+}
+
+/* Body styles */
+body {
+    font-family: Arial, sans-serif;
+    background-color: #f0f0f0;
+    margin-top: 75px;
+}
+
+/* Navigation styles */
+nav {
+    width: 100%;
+    height: 75px;
+    line-height: 75px;
+    padding: 0 50px;
+    position: fixed;
+    background-image: linear-gradient(#71b7e6, #9b59b6);
+    top: 0;
+    left: 0;
+    right: 0;
+    display: flex;
+    justify-content: space-between;
+    z-index: 999;
+    box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.1);
+}
+
+nav .logo p {
+    font-size: 24px;
+    font-weight: bold;
+    color: white;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    cursor: pointer;
+    margin: 0;
+}
+
+nav ul {
+    margin: 0;
+    padding: 0;
+    list-style: none;
+}
+
+nav ul li {
+    display: inline-block;
+    margin-right: 20px;
+}
+
+nav ul li:last-child {
+    margin-right: 0;
+}
+
+nav ul li a {
+    font-size: 16px;
+    text-transform: uppercase;
+    padding: 15 20px;
+    color: white;
+    text-decoration: none;
+    font-weight: bold;
+}
+
+nav ul li a:hover {
+    background: linear-gradient(135deg, #63aee0, #ab5cca);
+    padding: 15px 20px;
+    transition: all 0.4s ease 0s;
+    border-radius: 8px;
+}
+
+
+body{
+    display: flex;
+    margin-top: 75px;
+    justify-content: center;
+    align-items: center;
+    padding: 95px 0px;
+    background: linear-gradient(135deg, #71b7e6, #9b59b6);
+    height: 100vh;
+    flex-direction: column;
+    min-height: 100vh;
+    margin: 0;
+
+}
+.container{
+    max-width: 700px;
+    width: 100%;
+    background: #fff;
+    padding: 60px 30px;
+    border-radius: 5px;
+    height: 100vh;
+    overflow-y: auto;
+    min-height: 94vh;
+    
+
+}
+.container .title{
+    font-size: 25px;
+    font-weight: 500;
+    position: relative;
+}
+.container .title::before{
+    content: '';
+    position: absolute;
+    left: 0;
+    bottom: 0;
+    height: 3px;
+    width: 30px;
+    background: linear-gradient(135deg, #71b7e6, #9b59b6);
+}
+.container form .user-details{
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    margin: 20px 0 12px 0;
+}
+form .user-details .input-box{
+    margin-bottom: 15px;
+    width: calc(100% / 2 - 20px);
+}
+
+
+.user-details .input-box .details{
+    display: block;
+    font-weight: 500;
+    margin-bottom: 5px;
+}
+.user-details .input-box input{
+    height: 45px;
+    width: 100%;
+    outline: none;
+    border-radius: 5px;
+    border: 1px solid #ccc;
+    padding-left: 15px;
+    font-size: 16px;
+    border-bottom-width: 2px;
+    transition: all 0.3s ease;
+}
+.user-details .input-box input:focus {
+    border-color: #9b59b6; /* Change border color only when focused (clicked) */
+}
+
+form .button{
+    height: 45px;
+    margin: 45px 0;
+}
+form .button input{
+    height: 100%;
+    width: 100%;
+    outline: none;
+    color: #fff;
+    border: none;
+    font-size: 18px;
+    font-weight: 500;
+    border-radius: 5px;
+    letter-spacing: 1px;
+    background: linear-gradient(135deg, #9b59b6, #71b7e6);
+    cursor: pointer;
+}
+form .button input:hover{
+    background: linear-gradient(-135deg, #9b59b6, #71b7e6);    
+}
+.user-details .marital-box {
+    margin-bottom: 15px;
+    width: calc(100% / 2 - 20px);
+    
+}
+
+.user-details .marital-box .details {
+    display: block;
+    font-weight: 500;
+    margin-bottom: 5px;
+}
+
+.marital-box select.dd {
+    height: 45px;
+    width: 100%;
+    outline: none;
+    border-radius: 5px;
+    border: 1px solid #ccc;
+    padding-left: 15px;
+    font-size: 16px;
+    border-bottom-width: 2px;
+    transition: all 0.3s ease;
+    cursor: pointer;
+}
+/* .marital-box .dd-font{
+    display: block;
+    font-weight: 500;
+    margin-bottom: 5px;
+} */
+
+.marital-box select.dd {
+    font-size: 14px; /* Adjust font size for smaller screens */
+    font-family: 'Poppins', sans-serif; /* Apply the same font family */
+}
+
+.marital-box select.dd:focus,
+.marital-box select.dd:valid {
+    border-color: #9b59b6;
+}
+
+@media (max-width: 584px) {
+    .container{
+        max-width: 100%;
+    }
+    form .user-details .input-box{
+        margin-bottom: 15px;
+        width: 100%;
+    }
+    .container form .user-details{
+        max-height: 300px;
+        overflow-y: scroll;
+    }
+    .user-details::-webkit-scrollbar{
+        width: 0;
+    }
+}
+@media (max-width: 768px) {
+    nav {
+        padding: 0px 10px; /* Reduce padding for smaller screens */
+    }
+
+    nav ul {
+        float: none;
+        text-align: center; /* Center the navigation links */
+        margin-top: 10px;
+        /* flex-direction: column; */
+        align-items: flex-end; /* Add some space between the logo and links */
+    }
+
+    nav li {
+        display: block;
+        margin-bottom: 10px; /* Add space between each link */
+    }
+    form {
+        margin-top: 75px; /* Match the height of the navigation bar */
+    } 
+}
+
+
+  </style>
+</head>
+
+<body>
+    <nav>
+        <div class="logo">
+            <p>Order Management</p>
+        </div>
+        <ul>
+            <!-- <li><a href="/home/">Home</a></li> -->
+            <li><a href="/cust_login/">login Here</a></li>
+            <li></li>
+        </ul>
+      </div>
+    </nav>
+
+  
+
+  <div class="container">
+    <div class="title">Sign Up Here</div>
+
+    
+
+    <form action="/cust_signup/" method="post"> <br>
+    <form action="/cust_login/" method="post"> <br>
+      {% csrf_token %}
+
+    {% if messages %}
+        <div>
+            {% for message in messages %}
+                <p>{{ message.message }}</p>
+            {% endfor %}
+        </div>
+    {% endif %}
+
+      <div>
+        <span class="details" style="color: red;">{{ result }}</span>
+      </div>
+
+      <div class="user-details">
+        <div class="input-box">
+          <span class="details">Name<span style="color: red"> *</span></span>
+          <input type="text" placeholder="Enter Your Name" name="name" id="name" required />
+        </div>
+
+        <div class="input-box">
+          <span class="details">Email<span style="color: red"> *</span></span>
+          <input type="email" placeholder="Enter your Email" name="email" id="email" required />
+        </div>
+
+        <div class="input-box">
+          <span class="details">Password<span style="color: red"> *</span></span>
+          <input type="password" placeholder="Enter Password" id="password1" name="password1" required />
+        </div>
+
+        <div class="input-box">
+          <span class="details">Confirm Password<span style="color: red"> *</span></span>
+          <input type="password" placeholder="Confirm password" id="password2" name="password2" required />
+        </div>
+
+        
+
+      <div class="button">
+        <input type="submit" value="Click to Register" />
+      </div>
+
+      <a href="{% url 'cust_login' %}">I already have an account</a>
+    </form>
+  </div>
+
+</body>
+
+
+
+</html>

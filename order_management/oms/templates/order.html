@@ -1,0 +1,471 @@
+<!DOCTYPE html>
+<html>
+    
+<head>
+    <title>E-commerce Product List</title>
+    <link rel="stylesheet" href="order.css">
+  
+</head>
+<style>
+    * {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Poppins', sans-serif;
+}
+
+
+body {
+    font-family: Arial, sans-serif;
+    background-color: #f0f0f0;
+    margin-top: 75px;
+}
+
+nav {
+    width: 100%;
+    height: 75px;
+    line-height: 75px;
+    padding: 0 50px;
+    position: fixed;
+    background-image: linear-gradient(#71b7e6, #9b59b6);
+    top: 0;
+    left: 0;
+    right: 0;
+    display: flex;
+    justify-content: space-between;
+    z-index: 999;
+    box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.1);
+}
+
+nav .logo p {
+    font-size: 24px;
+    font-weight: bold;
+    color: white;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    cursor: pointer;
+    margin: 0;
+}
+
+nav ul {
+    margin: 0;
+    padding: 0;
+    list-style: none;
+}
+
+nav ul li {
+    display: inline-block;
+    margin-right: 20px;
+}
+
+nav ul li:last-child {
+    margin-right: 0;
+}
+
+nav ul li a {
+    font-size: 16px;
+    text-transform: uppercase;
+    padding: 15 20px;
+    color: white;
+    text-decoration: none;
+    font-weight: bold;
+}
+
+nav ul li a:hover {
+    background: linear-gradient(135deg, #63aee0, #ab5cca);
+    padding: 15px 20px;
+    transition: all 0.4s ease 0s;
+    border-radius: 8px;
+}
+.search-box {
+    display: flex;
+    align-items: center;
+    position: relative;
+}
+
+#search-query {
+    width: 100%;
+    padding: 10px;
+    padding-left: 40px; 
+    border: 1px solid #ccc;
+    border-radius: 4px;
+}
+
+#search-query:focus {
+    outline: none;
+    border-color: #71b7e6; 
+}
+
+.search-icon {
+    position: absolute;
+    left: 10px;
+    top: 50%;
+    transform: translateY(-50%);
+    color: #777; 
+    cursor: pointer;
+    line-height: 1; 
+    font-size: 20px; 
+}
+
+/* Container styles */
+.container {
+    max-width: 100%;
+    margin: 95px auto 20px;
+    background-color: #cfdfeb;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+    overflow-x: auto; 
+}
+.buy-now-button {
+    display: inline-block;
+    padding: 10px 50px;
+    text-align: center;
+    text-decoration: none;
+    color: white;
+    background: linear-gradient(135deg, #9b59b6, #71b7e6);
+    border-radius: 8px;
+    border: none;
+}
+
+.buy-now-button-link:hover {
+    background: linear-gradient(-135deg, #9b59b6, #71b7e6);
+}
+
+        .products-container {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
+            grid-gap: 50px;
+        }
+
+        .product {
+            border: 1px solid #ddd;
+            padding: 20px;
+            text-align: center;
+            background-color: #b8c0c6;
+            border-radius: 5px;
+        }
+
+        .product img {
+            width: 300px;
+            height: 250px;
+        }
+
+        .product-content {
+            margin-top: 10px;
+        }
+
+        h2 {
+            font-size: 20px;
+            margin: 10px 0;
+        }
+
+        p {
+            font-size: 16px;
+            align-items: center;
+        }
+
+        .quantity-control-container {
+    display: flex;
+    align-items: center;
+    justify-content: center; 
+    position: sticky;
+    top: 75px; 
+    
+    padding: 10px;
+    z-index: 1; 
+}
+
+.quantity-control-buttons,
+.quantity {
+    display: flex;
+    align-items: center;
+    margin: 0; 
+    padding: 10px; 
+}
+
+.quantity-control {
+    padding: 13px 35px;
+    text-align: center;
+    text-decoration: none;
+    color: white;
+    background: linear-gradient(135deg, #9b59b6, #71b7e6);
+    border-radius: 8px;
+    border: none;
+    cursor: pointer;
+    transition: background 0.3s ease-in-out;
+}
+.quantity-control:first-child {
+    margin-right: 10px;
+}
+input[type="number"] {
+    width: 80px;
+    padding: 8px;
+    text-align: center;
+}
+input[type="number"]::-webkit-inner-spin-button {
+    -webkit-appearance: inner-spin-button;
+    width: 3em; 
+    height: 3em;
+}
+
+input[type="number"]::-webkit-outer-spin-button {
+    -webkit-appearance: outer-spin-button;
+    width: 1.5em; 
+    height: 1.5em; 
+}
+
+        .price {
+            font-size: 18px;
+            font-weight: bold;
+            margin: 10px 0;
+        }
+
+.messages {
+    list-style: none;
+    padding: 15px;
+    margin: 0;
+    text-align: center;
+}
+
+.messages li {
+    font-size: 16px;
+    margin-bottom: 10px;
+    padding: 10px;
+    border-radius: 5px;
+}
+
+.messages.success li {
+    background-color: #4CAF50;
+    color: white;
+}
+
+.messages.error li {
+    background-color: #f44336;
+    color: white;
+}
+
+.messages.warning li {
+    background-color: #ff9800;
+    color: white;
+}
+
+.messages.info li {
+    background-color: #2196F3;
+    color: white;
+}
+
+
+@media screen and (max-width: 480px) {
+    nav .logo p {
+        font-size: 20px;
+    }
+
+    nav ul li {
+        margin-right: 10px;
+    }
+
+    .buy-now-button {
+        padding: 10px 20px;
+    }
+
+    .quantity-control {
+        padding: 10px 20px;
+    }
+
+    .quantity-control-buttons,
+    .quantity {
+        margin: 0;
+        padding: 0;
+    }
+
+    .product {
+        padding: 10px;
+    }
+
+    .product img {
+        width: 100%; 
+        height: 100%;
+        max-width: 100%; 
+    }
+
+    h2 {
+        font-size: 18px;
+    }
+
+    p {
+        font-size: 14px;
+    }
+
+    .price {
+        font-size: 16px;
+    }
+}
+
+
+</style>
+<body>
+
+    <nav>
+        <div class="logo">
+            <p>Shopping Deals</p>
+        </div>
+        <ul>
+            {% if user.is_authenticated %}
+            <li><a href="{% url 'view_cart' %}">Cart</a></li>
+            <li><a href="{% url 'placed_order_list' %}">Your Orders</a></li>
+            <li><a href="{% url 'cust_logout' %}">LOGOUT</a></li>
+            {% else %}
+            <li><a href="{% url 'cust_login' %}">LOGIN</a></li>
+            {% endif %}
+            
+            <li> 
+                <form method="get" action="" id="search-form">
+                    <div class="search-box">
+                        <div class="search-icon" id="search-icon">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24">
+                                <path d="M15.5 14h-.79l-.28-.27a6.5 6.5 0 1 0-1.06 1.06l.27.28v.79l5 4.99L20.49 19l-4.99-5zm-6 0C7.01 14 5 11.99 5 9.5S7.01 5 9.5 5 14 7.01 14 9.5 11.99 14 9.5 14z"/>
+                            </svg>
+                        </div>
+                        <input type="text" name="search_query" id="search-query" placeholder="Search by Product Name">
+                    </div>
+                </form>
+            </li>
+        </ul>
+    </nav>
+
+
+    <div class="container">
+           
+    </header>
+    {% if messages %}
+    <div class="messages">
+        <ul class="messages">
+            {% for message in messages %}
+            <li{% if message.tags %} class="{{ message.tags }}" {% endif %}>{{ message }}</li>
+                {% endfor %}
+        </ul>
+    </div>
+    {% endif %}
+    <main>
+
+        <div class="products-container">
+            {% for product in products %}
+            <div class="product">
+                <img src="{{ product.image.url }}" alt="{{ product.product_name }}">
+                <div class="product-content">
+                    <h2>{{ product.product_name }}</h2>
+                    <p>Description: {{ product.description }}</p>
+                    <p>Basic Price: {{ product.basic_price }}</p>
+                    <p>Transportation Charges: {{ product.transportation_charges }}</p>
+                    <p>Additional Taxes: {{ product.additional_taxes }}</p>
+    
+                    <div class="quantity-control-container">
+                        <span class="quantity">
+                            
+                            <form method="post" action="{% url 'add_to_cart' product.id %}">
+                                {% csrf_token %}
+                                <div>
+                                Quantity:
+                                <input type="number" name="selected_quantity" min="1" value="1" onchange="updateTotalAmount(this, {{ product.basic_price }}, {{ product.transportation_charges }}, {{ product.additional_taxes }}, '{{ product.id }}')"><br><br>
+                            </div>
+                            <div>
+                                <input type="hidden" name="buy_now" value="true">  <!-- Add a hidden field to indicate "Buy Now" action -->
+                            </div>
+                            <div class="quantity-control-buttons">
+                                <button type="submit" class="quantity-control">Buy Now</button>
+                           
+                            </form>
+                        
+                            <form action="{% url 'add_to_cart' product.id %}" class="d-inline">
+                                <button type="submit" class="quantity-control" name="add_to_cart">Add to Cart</button>
+                            </form>
+                        </div>
+                        </span>
+                    </div>
+                    
+    
+                    <p class="price">Total Amount: Rs. <span id="total-{{ product.id }}">0</span></p>
+                    <p id="out-of-stock-{{ product.id }}" style="color: red; display: none;">Out of Stock</p>
+                </div>
+            </div>
+            {% endfor %}
+        </div>
+   
+    </main>
+    <footer>
+        &copy; 2023 E-commerce Company. All rights reserved.
+    </footer>
+    </body>
+    <script>
+        // Function to calculate and display default total amount for each product
+        // Function to calculate and display the default total amount
+    function calculateDefaultTotalAmount(productId, basicPrice, transportationCharges, additionalTaxes) {
+        const defaultQuantity = 1;
+        const defaultTotalAmount = (basicPrice + transportationCharges + additionalTaxes) * defaultQuantity;
+        const totalAmountElement = document.getElementById('total-' + productId);
+        totalAmountElement.textContent = defaultTotalAmount;
+    }
+
+    // Call the function for each product on page load
+    {% for product in products %}
+    calculateDefaultTotalAmount('{{ product.id }}', {{ product.basic_price }}, {{ product.transportation_charges }}, {{ product.additional_taxes }});
+    {% endfor %}
+        // Function to handle quantity change
+        function updateTotalAmount(input, basicPrice, transportationCharges, additionalTaxes, productId) {
+            const selectedQuantity = parseInt(input.value);
+            const totalAmount = (basicPrice + transportationCharges + additionalTaxes) * selectedQuantity;
+            const totalAmountElement = document.getElementById('total-' + productId);
+            totalAmountElement.textContent = totalAmount;
+    
+            // Check if the selected quantity is more than what's available in stock
+            const maxQuantity = parseInt(input.max);
+            const outOfStockMessage = document.getElementById('out-of-stock-' + productId);
+            if (selectedQuantity > maxQuantity) {
+                outOfStockMessage.style.display = 'block';
+            } else {
+                outOfStockMessage.style.display = 'none';
+            }
+        }
+
+    </script>
+<script>
+    document.addEventListener('DOMContentLoaded', function () {
+        var searchInput = document.getElementById('search-query');
+        var products = document.querySelectorAll('.product');
+
+        function filterResults() {
+            var searchQuery = searchInput.value.toLowerCase();
+
+            products.forEach(function (product) {
+                var productName = product.querySelector('h2').textContent.toLowerCase();
+                if (productName.includes(searchQuery)) {
+                    product.style.display = 'block';
+                } else {
+                    product.style.display = 'none';
+                }
+            });
+        }
+
+        searchInput.addEventListener('input', filterResults);
+
+        document.getElementById('search-icon').addEventListener('click', filterResults);
+
+        searchInput.addEventListener('keyup', function (event) {
+            if (event.key === 'Enter') {
+                filterResults();
+            }
+        });
+    });
+</script>
+
+    
+    </html>
+    
+    
+    
+    
+    
+    
+    
+

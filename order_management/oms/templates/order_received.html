@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Order Form</title>
+</head>
+<body>
+    <h1>Create an Order</h1>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f4;
+            margin: 0;
+            padding: 0;
+        }
+
+        h1 {
+            background-color: #333;
+            color: #fff;
+            padding: 15px;
+            text-align: center;
+        }
+
+        form {
+            text-align: center;
+        }
+
+        table {
+            width: 80%;
+            border-collapse: collapse;
+            margin: 20px auto;
+        }
+
+        th, td {
+            border: 1px solid #ddd;
+            padding: 10px;
+            text-align: center;
+        }
+
+        th {
+            background-color: #333;
+            color: #fff;
+        }
+
+        select {
+            padding: 5px;
+        }
+
+        button {
+            background-color: #E91E63;
+            color: #fff;
+            border: none;
+            padding: 5px 10px;
+            font-size: 14px;
+            cursor: pointer;
+        }
+
+        button:hover {
+            background-color: #D81B60;
+        }
+    </style>
+    
+    <form method="post" action="{% url 'admin_zone' %}">
+        {% csrf_token %}
+        <button type="submit" name="admin_zone">ADMIN HOME</button>
+    </form><br><br>
+
+    <form method="post" action="{% url 'order_received' %}">
+        {% csrf_token %}
+        
+        <!-- Hidden input field for product_id -->
+        <input type="hidden" name="product_id" value="{{ product.id }}">
+        
+        <div>
+            <span class="details">{{ result }}</span>
+        </div>
+
+        <div class="marital-box">
+            <label for="marital-status" class="details">Product<span style="color: red"> *</span></label>
+            <select name="product_id" id="product_id" class="dd" required>
+                <option value="" class="dd-font" disabled selected>Select Product</option>
+                {% for product in products %}
+                    <option value="{{ product.id }}">{{ product.product_name }}</option>
+                {% endfor %}
+            </select>
+        </div><br>
+
+        <label for="product_name">Product Name:</label>
+        <input type="text" id="product_name" name="product_name" value="{{ product.product_name }}" readonly><br>
+    
+        <label for="quantity">Quantity:</label>
+        <input type="number" id="quantity" name="quantity" value="{{ product.quantity }}" readonly><br>
+    
+        <label for="description">Description:</label>
+        <textarea id="description" name="description" readonly>{{ product.description }}</textarea><br>
+    
+        <label for="basic_price">Basic Price:</label>
+        <input type="number" id="basic_price" name="basic_price" value="{{ product.basic_price }}" readonly><br>
+    
+        <label for "transportation_charges">Transportation Charges:</label>
+        <input type="number" id="transportation_charges" name="transportation_charges" value="{{ product.transportation_charges }}" readonly><br>
+    
+        <label for "additional_taxes">Additional Taxes:</label>
+        <input type="number" id="additional_taxes" name="additional_taxes" value="{{ product.additional_taxes }}" readonly><br>
+    
+        <label for "total_amount">Total Amount:</label>
+        <input type="number" id="total_amount" name="total_amount" value="{{ product.total_amount }}" readonly><br>
+    
+        <label for="created_at">Created At:</label>
+        <input type="text" id="created_at" name="created_at" value="{{ product.created_at }}" readonly><br>
+    
+        <img src="{{ product.image.url }}" alt="{{ product.product_name }}"><br>
+
+        <label for="status">Status:</label>
+        <select id="status" name="status">
+            <option value="Pending" {% if product.status == "Pending" %}selected{% endif %}>Pending</option>
+            <option value="Dispatched" {% if product.status == "Dispatched" %}selected{% endif %}>Dispatched</option>
+            <option value="Transit" {% if product.status == "Transit" %}selected{% endif %}>Transit</option>
+            <option value="Cancelled" {% if product.status == "Cancelled" %}selected{% endif %}>Cancelled</option>
+        </select><br>
+    
+        <button type="submit">Submit</button>
+    </form>
+</body>
+</html>

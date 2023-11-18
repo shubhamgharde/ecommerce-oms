@@ -1,0 +1,290 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Edit Profile</title>
+    <link rel="stylesheet" href="sign_up.css" />
+    <style>
+        * {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: 'Poppins', sans-serif;
+}
+
+nav {
+  width: 100%;
+  height: 75px;
+  line-height: 75px;
+  padding: 0 50px;
+  position: fixed;
+  background-image: linear-gradient(#71b7e6, #9b59b6);
+  top: 0;
+  left: 0;
+  right: 0;
+  display: flex;
+  justify-content: space-between;
+  z-index: 999;
+}
+
+nav .logo p {
+  font-size: 22px;
+  font-weight: bold;
+  color: white;
+  text-transform: uppercase;
+  letter-spacing: 1.5px;
+  cursor: pointer;
+  position: fixed;
+  margin: 0;
+}
+
+nav ul {
+  margin: 0;
+  padding: 0;
+  display: flex;
+}
+
+nav li {
+  display: inline-block;
+  list-style: none;
+  margin-right: 20px;
+}
+
+nav li:last-child {
+  margin-right: 0;
+}
+
+nav li a {
+  font-size: 18px;
+  text-transform: uppercase;
+  padding: 0px 10px;
+  color: white;
+  text-decoration: none;
+}
+
+nav li a:hover {
+  color: #ff8c69;
+  transition: all 0.4s ease 0s;
+}
+
+body {
+  margin-top: 75px;
+  padding: 0 50px;
+  background: linear-gradient(135deg, #71b7e6, #9b59b6);
+}
+
+.container {
+  max-width: 600px;
+  width: 100%;
+  background: #fff;
+  padding: 25px 30px;
+  border-radius: 5px;
+  background: linear-gradient(135deg, #aacce3, #e577cf);
+  margin: 0 auto;
+}
+
+.container .title {
+  font-size: 25px;
+  font-weight: 500;
+  position: relative;
+  font-size: 22px;
+  font-weight: bold;
+  text-align: left;
+  color: rgb(66, 63, 63);
+}
+
+.container .title::before {
+  content: '';
+  position: absolute;
+  left: 0;
+  bottom: 0;
+  height: 3px;
+  width: 30px;
+}
+
+.container form {
+  display: flex;
+  flex-direction: column; /* Stack elements vertically */
+}
+
+.container form .user-details {
+  margin: 20px 0;
+}
+
+.user-details .input-box,
+.marital-box {
+  margin-bottom: 15px;
+}
+
+.user-details .input-box .details,
+.marital-box .details {
+  display: block;
+  font-weight: 500;
+  margin-bottom: 2px;
+}
+
+.user-details .input-box input,
+.marital-box select.dd {
+  height: 45px;
+  width: 100%;
+  outline: none;
+  border-radius: 5px;
+  border: 1px solid #ccc;
+  padding-left: 15px;
+  font-size: 16px;
+  border-bottom-width: 2px;
+  transition: all 0.3s ease;
+}
+
+.user-details .input-box input:focus,
+.marital-box select.dd:focus,
+.marital-box select.dd:valid {
+  border-color: #9b59b6;
+}
+
+form .button {
+  height: 45px;
+  margin: 45px 0;
+}
+
+form .button input {
+  height: 100%;
+  width: 100%;
+  outline: none;
+  color: #fff;
+  border: none;
+  font-size: 16px;
+  font-weight: 500;
+  border-radius: 5px;
+  letter-spacing: 1px;
+  background: linear-gradient(135deg, #9b59b6, #71b7e6);
+  cursor: pointer;
+}
+
+form .button input:hover {
+  background: linear-gradient(-135deg, #9b59b6, #71b7e6);
+}
+
+@media (max-width: 584px) {
+  .container {
+    max-width: 100%;
+  }
+  form .user-details .input-box {
+    margin-bottom: 15px;
+    width: 100%;
+  }
+  .container form .user-details {
+    max-height: 300px;
+    overflow-y: scroll;
+  }
+  .user-details::-webkit-scrollbar {
+    width: 0;
+  }
+}
+
+@media (max-width: 768px) {
+  nav {
+    padding: 0px 10px;
+  }
+  nav ul {
+    float: none;
+    text-align: center;
+    margin-top: 10px;
+  }
+  nav li {
+    display: block;
+    margin-bottom: 10px;
+  }
+  form {
+    margin-top: 75px;
+  }
+}
+
+    </style>
+</head>
+
+<body>
+
+    <nav>
+        <div class="logo">
+            <p>enterprise resource planning</p>
+          
+        </div>
+        <ul>
+            <li><a href="/home/">Home</a></li>
+            <li><a href="{% url 'logout' %}">Logout</a></li>
+            <!-- <li><a href="/edit_profile/">Edit Profile</a></li> -->
+        </ul>
+    </nav>
+    <div class="container">
+        <div class="title">Edit Profile</div>
+        <!-- <h2>Edit Profile</h2> -->
+        <form method="post">
+            {% csrf_token %}
+            <!-- Display error messages here if any -->
+            <div>
+                {% for message in messages %}
+                <p>{{ message }}</p>
+                {% endfor %}
+            </div>
+            <div class="user-details">
+
+                <div class="input-box">
+                    <span class="details">Contact</span>
+                    <input type="text" name="contact" id="contact" value="{{ form_data.contact }}">
+                </div>
+
+                <div class="input-box">
+                    <span class="details">Address</span>
+                    <input type="text" value="{{ form_data.address }}" name="address" id="address">
+                </div>
+
+                <div class="input-box">
+                    <span class="details">Spouse Name</span>
+                    <input type="text" value="{{ form_data.spouse_name }}" name="spouse_name" id="spouse_name">
+                </div>
+
+
+                <div class="marital-box">
+                    <label for="marital-status" class="details">Qualification</label>
+                    <select name="qualification" id="qualification" class="dd" required>
+                        <option value="{{ form_data.qualification }}">{{ form_data.qualification }}</option>
+                        <option value="Engineer">Engineer</option>
+                        <option value="BSC">BSC</option>
+                        <option value="BA">BA</option>
+                        <option value="MBA">MBA</option>
+                    </select>
+                  </div>
+
+                <!-- <div class="input-box">
+                    <span class="details">Qualification</span>
+                    <input type="text" placeholder="Select qualification" name="qualification" id="qualification"
+                        required>
+                </div> -->
+
+                <!-- <label for="contact">contact:</label>
+        <input type="text" id="contact" name="contact" value="{{ form_data.contact }}" required><br> -->
+
+                <!-- <label for="address">address:</label>
+                <input type="text" id="address" name="address" value="{{ form_data.address }}" required><br>
+
+                <label for="spouse_name">spouse_name:</label>
+                <input type="text" id="spouse_name" name="spouse_name" value="{{ form_data.spouse_name }}" required><br>
+
+                <label for="qualification">qualification:</label>
+                <input type="text" id="qualification" name="qualification" value="{{ form_data.qualification }}"
+                    required><br> -->
+
+                <!-- Add fields for other profile information here -->
+
+                <!-- <input type="submit" value="Save Changes"> -->
+
+                <div class="button">
+                    <input type="submit" value="Save Changes">
+                </div>
+        </form>
+    </div>
+</body>
+
+</html>

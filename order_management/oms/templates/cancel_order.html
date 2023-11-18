@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Cancel Order</title>
+    <style>
+        /* Add your CSS styles here to enhance the page's appearance */
+        body {
+            font-family: Arial, sans-serif;
+        }
+        .container {
+            max-width: 500px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+        .confirmation-box {
+            background-color: #f9f9f9;
+            padding: 20px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+        }
+        button {
+            background-color: #d9534f;
+            color: #fff;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Cancel Order</h1>
+        <div class="confirmation-box">
+            <p>Are you sure you want to cancel the following order?</p>
+            <ul>
+                <li><strong>Product_id:</strong> {{ cancel_order.product_id }}</li>
+                <li><strong>Product:</strong> {{ cancel_order.product_name }}</li>
+                <li><strong>Quantity:</strong> {{ cancel_order.quantity }}</li>
+                <li><strong>Basic Price:</strong> {{ cancel_order.basic_price }}</li>
+                <li><strong>Transportation Charges:</strong> {{ cancel_order.transportation_charges }}</li>
+                <li><strong>Additional Taxes:</strong> {{ cancel_order.additional_taxes }}</li>
+                <li><strong>Total Amount:</strong> {{ cancel_order.total_amount }}</li>
+                <li><strong>Image:</strong> <img src="{{ cancel_order.image.url }}" alt="Product Image" width="100"></li>
+                <li><strong>Status:</strong> {{ cancel_order.status }}</li>
+                <li><strong>Cancel Date:</strong> {{ cancel_order.cancel_date }}</li>
+                <!-- Add more details as needed -->
+            </ul>
+            <form method="post">
+                {% csrf_token %}
+                <button type="submit">Confirm Cancel</button>
+            </form>
+        </div>
+    </div>
+</body>
+</html>

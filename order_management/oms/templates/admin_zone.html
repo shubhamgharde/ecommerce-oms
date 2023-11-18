@@ -1,0 +1,165 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Order Management Dashboard</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Poppins', sans-serif;
+        }
+
+        body {
+            background: #7d8ba5;
+        }
+
+        nav {
+            background: linear-gradient(#71b7e6, #9b59b6);
+            color: white;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            height: 75px;
+            padding: 0 20px;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+        }
+
+        .logo {
+            font-size: 24px;
+            font-weight: bold;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            cursor: pointer;
+        }
+
+        nav ul {
+            list-style: none;
+            margin: 0;
+            padding: 0;
+        }
+
+        nav ul li {
+            display: inline;
+            margin-right: 20px;
+        }
+
+        nav ul li:last-child {
+            margin-right: 0;
+        }
+
+        nav ul li a {
+            text-transform: uppercase;
+            text-decoration: none;
+            color: white;
+            font-weight: bold;
+        }
+
+        nav ul li a:hover {
+            background: linear-gradient(135deg, #63aee0, #ab5cca);
+            border-radius: 8px;
+            padding: 10px 20px;
+            transition: all 0.4s ease 0s;
+        }
+
+        .dashboard {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            margin: 20px;
+        }
+
+        .dashboard-item {
+            background: #ffffff;
+            border-radius: 5px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+            margin: 20px;
+            padding: 20px;
+            text-align: center;
+            width: 300px;
+        }
+
+        .dashboard-item h2 {
+            font-size: 24px;
+            font-weight: bold;
+            color: #444;
+        }
+
+        .dashboard-item p {
+            color: #777;
+        }
+
+        .dashboard-item a {
+            text-decoration: none;
+            background: linear-gradient(135deg, #9b59b6, #71b7e6);
+            border: none;
+            border-radius: 5px;
+            color: white;
+            cursor: pointer;
+            display: block;
+            font-size: 20px;
+            font-weight: 500;
+            letter-spacing: 1px;
+            margin: 10px 0;
+            padding: 10px;
+            text-transform: uppercase;
+            transition: background 0.3s;
+        }
+
+        .dashboard-item a:hover {
+            background: linear-gradient(-135deg, #9b59b6, #71b7e6);
+        }
+    </style>
+</head>
+<body>
+    <nav>
+        <div class="logo">
+            Order Management Dashboard
+        </div>
+        <ul>
+            <li><a href="{% url 'home' %}">Home</a></li>
+        </ul>
+    </nav>
+    <div class="dashboard">
+        <div class="dashboard-item">
+            <h2>Supplier Detail List</h2>
+            <p>Manage supplier details</p>
+            <a href="{% url 'supplier_detail_list' %}">Go to Supplier List</a>
+        </div>
+        <div class="dashboard-item">
+            <h2>Product List</h2>
+            <p>View and manage products</p>
+            <a href="{% url 'product_list' %}">Go to Product List</a>
+        </div>
+        <div class="dashboard-item">
+            <h2>Pending Order</h2>
+            <p>View Pending orders</p>
+            <a href="{% url 'pending_orders' %}">Go to Order Pending</a>
+        </div>
+        <div class="dashboard-item">
+            <h2>Order Received</h2>
+            <p>View received orders</p>
+            <a href="{% url 'order_received_list' %}">Go to Order Received</a>
+        </div>
+        <div class="dashboard-item">
+            <h2>Order Dispatch</h2>
+            <p>Manage dispatched orders</p>
+            <a href="{% url 'order_dispatched_list' %}">Go to Order Dispatch</a>
+        </div>
+        <div class="dashboard-item">
+            <h2>Order Transit</h2>
+            <p>View orders in transit</p>
+            <a href="{% url 'order_transit_list' %}">Go to Order Transit</a>
+        </div>
+        <div class="dashboard-item">
+            <h2>Cancel orders</h2>
+            <p>View Cancel orders List</p>
+            <a href="{% url 'cancel_order_list' %}">Go to Cancel orders List</a>
+        </div>
+        
+    </div>
+</body>
+</html>
