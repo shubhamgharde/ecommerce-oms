@@ -316,6 +316,7 @@ input[type="number"]::-webkit-outer-spin-button {
             <li><a href="{% url 'placed_order_list' %}">Your Orders</a></li>
             <li><a href="{% url 'cust_logout' %}">LOGOUT</a></li>
             {% else %}
+            <li><a href="{% url 'cust_signup' %}">SIGN UP</a></li>
             <li><a href="{% url 'cust_login' %}">LOGIN</a></li>
             {% endif %}
             
